@@ -1,0 +1,25 @@
+{
+  "name": "yvue-cli",
+  "version": "1.0.0",
+  "description": "vue 脚手架",
+  "bin": "bin/yv-cli.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "cli",
+    "vue"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yzfgithub/yv-cli.git"
+  },
+  "author": "yzfgithub",
+  "license": "ISC",
+  "dependencies": {
+    "commander": "^9.3.0",
+    "inquirer": "^9.0.0",
+    "ora": "^6.1.0"
+  }
+}
