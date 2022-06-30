@@ -1,9 +1,9 @@
 {
-  "name": "@zfyan/yv-cli",
-  "version": "1.0.1",
+  "name": "yv-cli",
+  "version": "1.0.0",
   "description": "vue 脚手架",
   "bin": {
-    "yv-cli": "bin/yv-cli.js"
+    "yvue-cli": "bin/yv-cli.js"
   },
   "type": "module",
   "scripts": {
