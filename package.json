@@ -1,5 +1,5 @@
 {
-  "name": "yvue-cli",
+  "name": "@zfyan/yv-cli",
   "version": "1.0.0",
   "description": "vue 脚手架",
   "bin": "bin/yv-cli.js",
