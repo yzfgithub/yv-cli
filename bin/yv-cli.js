@@ -1,11 +1,11 @@
 #!/usr/bin/env node
 
 console.log('zf-cli working');
+
 import {program} from 'commander'
 import process from 'child_process'
 import inquirer from 'inquirer'
-import ora from 'ora'
-import { modifyPackageJsonItem } from '../utils/index.js'
+import { runDownload } from '../utils/index.js'
 
 program.command('init <name>')
     // .option('--typescript', "创建vue+ts项目")
@@ -32,30 +32,14 @@ program.command('init <name>')
         console.log('inaction',name)
         inquirer.prompt(promptList).then(answers => {
             if(answers.type === 'vue3+element-plus') {
-                const gitCommand = 'https://github.com/yzfgithub/vue-element-plus-template.git';
-                runDownload(gitCommand, answers, name)
+                const gitAddress = 'https://github.com/yzfgithub/vue-element-plus-template.git';
+                runDownload(gitAddress, answers, name)
             } else if(answers.type === 'vue3+vant') {
-                const gitCommand = 'https://github.com/yzfgithub/vue-vant-template.git';
-                runDownload(gitCommand, answers, name)
+                const gitAddress = 'https://github.com/yzfgithub/vue-vant-template.git';
+                runDownload(gitAddress, answers, name)
             }
         })
     })
 
 program.parse(process.argv);
 
-function runDownload(gitCommand, answers, name) {
-    let spinner = ora('downloading... (just take a break, these whole things may take a long time.)')
-    spinner.start();
-
-    process.exec('git clone '+ gitCommand +' '+ name, function(err,stdout,stderr) {
-        spinner.stop();
-        if(err !== null && stderr !== null) {
-            console.log('exec error:' + err);
-            return ;
-        }
-        console.log(stdout);
-        console.log('clone success')
-        modifyPackageJsonItem(name, answers.version || '1.0.0', 'version')
-        modifyPackageJsonItem(name, name, 'name')
-    })
-}
