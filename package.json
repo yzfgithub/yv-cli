@@ -1,8 +1,10 @@
 {
   "name": "@zfyan/yv-cli",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "vue 脚手架",
-  "bin": "bin/yv-cli.js",
+  "bin": {
+    "yv-cli": "bin/yv-cli.js"
+  },
   "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
