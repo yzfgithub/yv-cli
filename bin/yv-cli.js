@@ -2,43 +2,29 @@
 
 console.log('zf-cli working');
 
-import {program} from 'commander'
+import { program } from 'commander'
 import process from 'child_process'
 import inquirer from 'inquirer'
 import { runDownload } from '../utils/index.js'
+import { template, promptList } from '../utils/constant.js'
 
-program.command('init <name>')
-    // .option('--typescript', "创建vue+ts项目")
-    .action((name, cmd) => {
-        const promptList =
-            [
-                {
-                    type: 'list',
-                    name: 'type',
-                    message: 'Please select a project  template',
-                    choices: [
-                        'vue3+vant',
-                        'vue3+element-plus'
-                    ]
-                },
-                {
-                    type: 'input',
-                    name: 'version',
-                    message: 'Version(1.0.0)',
-                    default: '1.0.0'
-                }
-            ]
-        
-        console.log('inaction',name)
+program.command('create <projectName>')
+    .description('创建新项目')
+    .action((projectName, cmd) => {
+        console.log('inaction',projectName)
         inquirer.prompt(promptList).then(answers => {
-            if(answers.type === 'vue3+element-plus') {
-                const gitAddress = 'https://github.com/yzfgithub/vue-element-plus-template.git';
-                runDownload(gitAddress, answers, name)
-            } else if(answers.type === 'vue3+vant') {
-                const gitAddress = 'https://github.com/yzfgithub/vue-vant-template.git';
-                runDownload(gitAddress, answers, name)
-            }
+            const gitAddress = template[answers.type].gitAddress;
+            runDownload(gitAddress, answers, projectName)
         })
+    })
+
+program
+    .command('list')
+    .description('查看所有可用模版')
+    .action(() => {
+        for(let key in template) {
+            console.log(`${key}：${template[key].description}`)
+        }
     })
 
 program.parse(process.argv);

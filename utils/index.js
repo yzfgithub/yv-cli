@@ -25,8 +25,9 @@ export function runDownload(gitAddress, answers, name) {
             return ;
         }
         console.log(stdout);
-        console.log('clone success')
-        modifyPackageJsonItem(name, answers.version || '1.0.0', 'version')
+        console.log('create project success')
         modifyPackageJsonItem(name, name, 'name')
+        modifyPackageJsonItem(name, answers.version || '1.0.0', 'version')
+        modifyPackageJsonItem(name, answers.description || '', 'description')
     })
 }
